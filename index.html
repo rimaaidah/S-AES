@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>S-AES Simulator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar card">
+      <div>
+        <p class="eyebrow">Kriptografi • S-AES</p>
+        <h1>Web Simulasi Simplified AES</h1>
+        <p class="muted">Enkripsi, dekripsi, dan langkah perhitungan GF(2^4).</p>
+      </div>
+      <button id="themeToggle" class="btn ghost" type="button" aria-pressed="false">🌙 Dark Mode</button>
+    </header>
+
+    <main class="grid">
+      <section class="card">
+        <div class="section-head">
+          <h2>Input Data</h2>
+          <p class="muted">Klik contoh atau ubah sendiri.</p>
+        </div>
+
+        <form id="saesForm" novalidate>
+          <div class="field">
+            <label for="message">Plaintext / Ciphertext</label>
+            <input id="message" name="message" type="text" inputmode="numeric" maxlength="16"
+              placeholder="Contoh: 1101011100101000" autocomplete="off"
+              value="1101011100101000" />
+            <small>Harus 16 bit biner.</small>
+          </div>
+
+          <div class="field">
+            <label for="key">Kunci 16-bit</label>
+            <input id="key" name="key" type="text" inputmode="numeric" maxlength="16"
+              placeholder="Contoh: 0100101011110101" autocomplete="off"
+              value="0100101011110101" />
+            <small>Harus 16 bit biner.</small>
+          </div>
+
+          <div class="field">
+            <label>Mode Operasi</label>
+            <div class="segmented">
+              <label><input type="radio" name="mode" value="encrypt" checked> Enkripsi</label>
+              <label><input type="radio" name="mode" value="decrypt"> Dekripsi</label>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn primary" type="submit">Submit</button>
+            <button class="btn secondary" type="reset" id="resetBtn">Reset</button>
+          </div>
+
+          <p id="errorBox" class="error" role="alert" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="card">
+        <div class="section-head">
+          <h2>Output Hasil</h2>
+          <p class="muted">Tampilan hasil dibuat lebih besar.</p>
+        </div>
+
+        <div id="resultBox" class="result empty">Belum ada proses.</div>
+
+        <div class="output-grid">
+          <div>
+            <span class="label">Binary</span>
+            <code id="binaryOutput" class="big-output">-</code>
+          </div>
+          <div>
+            <span class="label">Hex</span>
+            <code id="hexOutput" class="big-output">-</code>
+          </div>
+        </div>
+      </section>
+
+      <section class="card full">
+        <div class="section-head">
+          <h2>Tabel Referensi</h2>
+          <p class="muted">S-Box, inverse S-Box, MixColumns, dan RCON.</p>
+        </div>
+        <div id="tablesArea"></div>
+      </section>
+
+      <section class="card full">
+        <div class="section-head">
+          <h2>Langkah Perhitungan</h2>
+          <p class="muted">Ditampilkan bertahap dan bisa dibuka-tutup.</p>
+        </div>
+        <div id="stepsArea"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
